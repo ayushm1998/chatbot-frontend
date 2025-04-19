@@ -3,13 +3,6 @@ import "@azure/openai/types";
 
 
 
-const endpoint =process.env.REACT_APP_AZURE_OPENAI_ENDPOINT ||"https://ipge-cb-oai.openai.azure.com/";
-const apiKey =process.env.AZURE_OPENAI_API_KEY ||"5YZMdgUG6U6v77ptE7Z61R16iBNIw2JkWRDuXweueDC3e4lPBoUMJQQJ99BCACYeBjFXJ3w3AAABACOG1KcQ";
-const apiVersion = "2024-05-01-preview";
-const deployment = "gpt-4o"; // This must match your deployment name
-const searchEndpoint = process.env.REACT_APP_AZURE_AI_SEARCH_ENDPOINT ||"https://ipge-oi-cb.search.windows.net";
-const searchKey =process.env.REACT_APP_AZURE_AI_SEARCH_API_KEY ||"enqXmGfa3RFjGCEO3nSXNYJm9iShBAcdy5A9EOOoZyAzSeCO7cu6";
-const searchIndex =process.env.REACT_APP_AZURE_AI_SEARCH_INDEX || "index-documents";
 
 const client = new AzureOpenAI({
   endpoint,
