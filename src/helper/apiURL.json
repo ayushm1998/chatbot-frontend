@@ -1,0 +1,5 @@
+{ "URL": {
+    "login":"http://localhost:3000/api/login/token",
+    "logout":"http://localhost:3000/api/logout",
+    "openai":"http://localhost:3000/api/bot/openaicall"
+} }

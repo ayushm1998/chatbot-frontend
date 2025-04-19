@@ -1,0 +1,389 @@
+/* Importing Google Fonts - Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin-top: 50px;
+  padding-top: 20px;
+  background-image: url("./assets/ipge.png"),linear-gradient(#008554, #fde89b);
+  background-repeat: no-repeat;
+  background-position: center top; /* Center the image */
+  background-size: contain;
+
+
+
+}
+#chatbot-toggler {
+  position: absolute ;
+  bottom: 30px;
+  right: 35px;
+  border: none;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #004e38;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+.container.show-chatbot #chatbot-toggler {
+  transform: rotate(90deg);
+}
+#chatbot-toggler span {
+  color: #fcdc69;
+  position: absolute;
+}
+#chatbot-toggler span:last-child,
+.container.show-chatbot #chatbot-toggler span:first-child {
+  opacity: 0;
+}
+.container.show-chatbot #chatbot-toggler span:last-child {
+  opacity: 1;
+}
+
+.logout-button {
+  background-color: #d9534f; /* A red tone indicating logout/danger */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 1px;
+  font-weight: 00;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c9302c;
+}
+
+.chatbot-popup {
+  position: fixed;
+  width: 420px;
+  opacity: 0;
+  right: 35px;
+  bottom: 90px;
+  pointer-events: none;
+  transform: scale(0.2);
+  overflow: hidden;
+  background: #e7e7c0;
+  border-radius: 15px;
+  transform-origin: bottom right;
+  box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
+    0 32px 64px -48px rgba(0, 0, 0, 0.5);
+  transition: all 0.1s ease;
+}
+.container.show-chatbot .chatbot-popup {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+.chatbot-popup .chat-header {
+  display: flex;
+  padding: 15px 22px;
+  align-items: center;
+  background: #004e38;
+  justify-content: space-between;
+}
+.chat-header .header-info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.header-info svg {
+  width: 50px;
+  height:50px;
+  flex-shrink: 0;
+  padding: 6px;
+  fill: #0a720f;
+  background: #b6c05f;
+  border-radius: 50%;
+}
+.header-info .logo-text {
+  color: #d3c389;
+  font-weight: 600;
+  font-size: 1.31rem;
+  letter-spacing: 0.02rem;
+}
+.chat-header button {
+  border: none;
+  height: 30px;
+  width: 30px;
+  color: #d3c389;
+  cursor: pointer;
+  padding-top: 2px;
+  margin-right: -10px;
+  font-size: 1.8rem;
+  font-weight: 500;
+  border-radius: 50%;
+  background: none;
+  transition: 0.2s ease;
+}
+.chat-header button:hover {
+  background: #164537;
+}
+.chat-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 460px;
+  overflow-y: auto;
+  margin-bottom: 82px;
+  padding: 25px 22px;
+  scrollbar-width: thin;
+  scrollbar-color: #c2c59e transparent;
+}
+.chat-body .message {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+}
+.chat-body .message svg {
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+  padding: 6px;
+  fill: #fff;
+  align-self: flex-end;
+  margin-bottom: 2px;
+  background: #bedd35;
+  border-radius: 50%;
+}
+.chat-body .message img {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  padding: 6px;
+  align-self: auto;
+  object-fit: scale-down;
+  margin-bottom: 2px;
+  border-radius: 80%;
+}
+.chat-body .message .message-text {
+  padding: 12px 16px;
+  max-width: 75%;
+  font-size: 0.90rem;
+  color: #474343;
+  word-wrap: break-word;
+  white-space: pre-line;
+}
+.chat-body .message.error .message-text {
+  color: #ff0000;
+}
+.chat-body .bot-message .message-text {
+  background: #cfc882;
+  border-radius: 13px 13px 13px 3px;
+}
+.chat-body .user-message {
+  flex-direction: column;
+  align-items: flex-end;
+}
+.chat-body .user-message .message-text {
+  color: #fff;
+  background: #054821;
+  border-radius: 13px 13px 3px 13px;
+}
+.chat-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  padding: 15px 22px 20px;
+}
+.chat-footer .chat-form {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: #fff;
+  border-radius: 32px;
+  outline: 1px solid #CCCCE5;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.06);
+}
+.chat-form:focus-within {
+  outline: 2px solid #458b16;
+}
+.chat-form .message-input {
+  width: 100%;
+  height: 47px;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  padding: 0 17px;
+  background: none;
+}
+.chat-form #send-message {
+  height: 35px;
+  width: 35px;
+  border: none;
+  flex-shrink: 0;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  margin-right: 6px;
+  background: #19861f;
+  border-radius: 50%;
+  font-size: 1.15rem;
+  transition: 0.2s ease;
+}
+.chat-form .message-input:valid~#send-message {
+  display: block;
+}
+.chat-form #send-message:hover {
+  background: #168024;
+}
+/* Responsive media query for mobile screens */
+@media (max-width: 520px) {
+  #chatbot-toggler {
+    right: 20px;
+    bottom: 20px;
+  }
+  .chatbot-popup {
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    border-radius: 0;
+    width: 100%;
+  }
+  .chatbot-popup .chat-header {
+    padding: 12px 15px;
+  }
+  .chat-body {
+    height: calc(90% - 55px);
+    padding: 25px 15px;
+  }
+  .chat-footer {
+    padding: 10px 15px 15px;
+  }
+}
+
+.login-page {
+  /* 
+    Centers the login container vertically and horizontally.
+    If you want to display other content behind or around the form,
+    adjust or remove the min-height and flex settings as desired.
+  */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; /* or 100vh if you want it fully centered on screen */
+  padding: 20px;
+}
+
+.login-container {
+  /* 
+    A "card" style container for your login form.
+    You can tweak background, border, and shadow to your preference.
+  */
+  max-width: 300px;
+  width: 100%;
+  background: transparent;
+  border-radius: 8px;
+  padding: 25px 30px;
+  margin-top: 130px;
+ 
+}
+
+.login-container h2 {
+  margin-bottom: 30px;
+  color: #004e38; /* Matches some of your existing green tones */
+  text-align: center;
+  font-size: 1.5rem;
+  letter-spacing: 0.03rem;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.login-container label {
+  font-weight: 600;
+  color: #094427;
+  margin-bottom: 5px;
+}
+
+.login-container input {
+  padding: 5px 20px;
+  margin-bottom: 10px;
+  border: 1.5px solid #0d5c37;
+  border-radius: 4px;
+  outline: none;
+  font-size: 0.8rem;
+  transition: border-color 0.2s ease;
+}
+
+.login-container input:focus {
+  border-color: #0a440d; /* Slightly brighter green to match your theme */
+}
+
+.login-container button[type="submit"] {
+  background: #136445;
+  color: #e0d070;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 0;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.2s ease;
+  width: 100%;
+  align-self: center;
+}
+.login-container button {
+  background: #136445;
+  color: #e0d070;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 0;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.2s ease;
+  width: 100%;
+  margin-top: 10px;
+  align-self: center;
+}
+
+.login-container button:hover {
+  background: #1a5a42;
+}
+
+.login-container button[type="submit"]:hover {
+  background: #1a5a42;
+}
+
+.login-container .error-message {
+  color: #ff0000;
+  font-size: 0.9rem;
+  margin-top: -5px;
+  margin-bottom: 5px;
+}
+
+/* 
+  Example media query for smaller screens:
+  Reduce padding and font sizes for mobile devices if needed 
+*/
+@media (max-width: 520px) {
+  .login-container {
+    margin: 0 10px;
+    padding: 20px;
+  }
+  .login-container h2 {
+    font-size: 1rem;
+  }
+  .login-container button[type="submit"] {
+    padding: 10px 0;
+    font-size: 0.85rem;
+  }
+}

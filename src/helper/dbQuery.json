@@ -1,0 +1,5 @@
+{
+    "Student": {
+    "getStudentData": "select * from students where stdid= %L"
+  }
+}
